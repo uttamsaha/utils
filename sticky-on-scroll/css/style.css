@@ -1,0 +1,153 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+/* scroll bar design  */
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track{
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb{
+    background: #bf0606;
+}
+::selection{
+    background: rgba(0,123,255,0.3);
+}
+
+
+.content{
+    max-width: 1250px;
+    margin: auto;
+    padding: 0 30px;
+}
+
+.navbar{
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    padding: 25px 0;
+    transition: all 0.3s ease;
+}
+
+.sticky{
+    background-color: #1b1b1b;
+    padding: 10px 0;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.1);
+}
+.navbar .content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar .logo a{
+    color: white;
+    font-size: 30px;
+    font-weight: 600px;
+    text-decoration: none;
+}
+.navbar .menu-list{
+    display: inline-flex;
+}
+.menu-list li{
+    list-style: none;
+}
+.menu-list li a{
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.menu-list li a:hover{
+    color: #bf0606;
+}
+.banner{
+    background: url("../images/bg3.webp") no-repeat;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.about{
+    padding: 30px 0;
+}
+.about .title{
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.about p{
+    padding-top: 20px;
+    text-align: justify;
+
+}
+
+/* //responsive icon  */
+.icon {
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    display: none;
+}
+.menu-list .cancel-btn{
+    position: absolute;
+    right: 30px;
+    top: 20px;
+}
+@media (max-width:1230px){
+    .content{
+        padding: 0 60px;
+    }
+}
+@media (max-width:100px){
+    .content{
+        padding: 0 40px;
+    }
+}
+@media (max-width:868px){
+    .icon{
+        display: block;
+    }
+    body.disabled{
+        overflow: hidden;
+    }
+    .icon.hide{
+        display: none;
+    }
+    /* // mobile e menu full screeen  */
+    .navbar .menu-list{
+        position: fixed;
+        height: 100vh;
+        width: 100%;
+        max-width: 400px;
+        left: -100%;
+        top: 0px;
+        display: block;
+        padding: 40px 0;
+        text-align: center;
+        background: #222;
+        transition:  all 0.3s ease;
+    }
+    .navbar.show .menu-list{
+        left: 0%;
+    }
+    .navbar .menu-list li{
+        margin-top: 45px;
+    }
+    .navbar .menu-list li a{
+        font-size: 23px;
+        margin-left: -100%;
+        transition:  0.6s cubic-bezier(0.68,-0.55,265,1.55);
+    }
+    .navbar.show .menu-list li a {
+        margin-left: 0;
+    }
+}
+@media (max-width:3380px){
+    .navbar .logo a{
+        font-size: 27px;
+    }
+}
