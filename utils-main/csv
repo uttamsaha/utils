@@ -1,0 +1,26 @@
+const csvData = `"name_operator","type_of_client","distribution_location_point","name_of_client","type_of_connection","type_of_connectivity","activation_date","bandwidth_allocation MB","house_no","road_no","area","district","thana","client_phone","mail","selling_bandwidthBD (excluding VAT)"
+"KBZ Online","Home","Demo Pop","uttamsaha","Wired","Shared","2025-02-24","0","","","Dhaka","Tangail","Tangail","34343","0","0"`;
+const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+saveAs(blob, "dis_report_old.csv");
+
+import { saveAs } from "file-saver";
+
+  const exportDisReportAPI = async () => {
+    try {
+      //exportDisReport redux api call
+      const response = await exportDisReport({ queryParams: queryParams });
+    
+      if (response.data) {
+        // Handle the response as plain text (CSV string)
+        const csvData = response.data;
+
+        // Create a Blob from the CSV string
+        const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+
+        // Trigger the download
+        saveAs(blob, "dis_report_old.csv");
+      }
+    } catch (error) {
+      console.error("Error exporting report:", error);
+    }
+  };

@@ -1,0 +1,72 @@
+"use client";
+import { Card, CardContent } from "@/components/ui/card";
+import React from "react";
+import MinMaxFilter from "./MinMaxFilter";
+import { filterOptions } from "../dummyData/filterOptions";
+import { Checkbox } from "@/components/ui/checkbox";
+
+const CategoryFilter = () => {
+  // Create an object to store the seeMore state for each filter
+  const [seeMoreState, setSeeMoreState] = React.useState<
+    Record<number, boolean>
+  >({});
+
+  const handleSeeMoreClick = (filterIndex: number) => {
+    // Toggle the state for the specific filter index
+    setSeeMoreState((prevState) => ({
+      ...prevState,
+      [filterIndex]: !prevState[filterIndex], // Toggle the visibility
+    }));
+  };
+
+  console.log('see more', seeMoreState)
+
+  return (
+    <Card className=" w-full">
+      <CardContent className="py-2.5">
+        <h4 className="mb-6 text-xl leading-[30px] font-medium text-muted-800">
+          Filters
+        </h4>
+        <MinMaxFilter />
+
+        <div className="mt-6">
+          {filterOptions?.map((filter, i) => (
+            <div className="mb-6" key={i}>
+              <h6 className="mb-2.5 text-sm leading-5 font-medium text-muted-800">
+                {filter?.name}
+              </h6>
+              {filter?.options
+                ?.slice(0, seeMoreState[i] ? filter?.options?.length : 6)
+                .map((option, optionIndex) => (
+                  <div className="mb-1.5" key={optionIndex}>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        className="text-muted-600 w-[14px] h-[14px] sm:w-[16px] sm:h-[16px] "
+                        id={option?.id?.toString()}
+                      />
+                      <label
+                        htmlFor={option?.id?.toString()}
+                        className="text-xs sm:text-sm leading-5 text-muted-600 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        {option?.name}
+                      </label>
+                    </div>
+                  </div>
+                ))}
+              {filter?.options?.length > 6 && (
+                <p
+                  onClick={() => handleSeeMoreClick(i)}
+                  className="cursor-pointer text-[10px] leading-[13px] text-primary"
+                >
+                  {seeMoreState[i] ? "See less" : "See more"}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default CategoryFilter;
